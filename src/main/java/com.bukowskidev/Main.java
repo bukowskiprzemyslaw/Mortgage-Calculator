@@ -12,6 +12,7 @@ public class Main {
         final byte PERCENT = 100;
 
         System.out.println("Witaj w kalkulatorze kredytowym");
+        System.out.println("-------------------------------");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -31,7 +32,7 @@ public class Main {
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) -1);
 
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortage);
-        System.out.println("Kredyt wynosi miesięcznie: " + mortgageFormatted);
+        System.out.println("Miesięczna rata kredytu wynosi : " + mortgageFormatted);
     }
 
     }
