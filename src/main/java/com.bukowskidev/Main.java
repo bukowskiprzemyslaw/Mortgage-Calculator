@@ -12,6 +12,7 @@ public class Main {
         final byte PERCENT = 100;
 
         int loan = 0;
+        float monthlyInterest = 0;
 
         System.out.println("Witaj w kalkulatorze kredytowym");
         System.out.println("-------------------------------");
@@ -26,9 +27,15 @@ public class Main {
             System.out.println("Kwota kredytu powinna wynosić od tysiąca do 5 milionów zł");
         }
 
-        System.out.println("Podaj roczne oprocentowanie:");
-        float annualInterest = scanner.nextFloat();
-        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        while (true) {
+            System.out.println("Podaj roczne oprocentowanie:");
+            float annualInterest = scanner.nextFloat();
+            if (annualInterest >= 1 && annualInterest <= 50) {
+                monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+                break;
+            }
+            System.out.println("Oprocentowanie powinno być w przedziale od 1 do 50");
+        }
 
         System.out.println("Podaj okres spłaty (ilość lat): ");
         byte years = scanner.nextByte();
