@@ -11,13 +11,20 @@ public class Main {
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
 
+        int loan = 0;
+
         System.out.println("Witaj w kalkulatorze kredytowym");
         System.out.println("-------------------------------");
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Podaj kwotę kredytu:");
-        int loan = scanner.nextInt();
+        while (true) {
+            System.out.println("Podaj kwotę kredytu:");
+            loan = scanner.nextInt();
+            if (loan >= 1000 && loan <= 5_000_000)
+                break;
+            System.out.println("Kwota kredytu powinna wynosić od tysiąca do 5 milionów zł");
+        }
 
         System.out.println("Podaj roczne oprocentowanie:");
         float annualInterest = scanner.nextFloat();
