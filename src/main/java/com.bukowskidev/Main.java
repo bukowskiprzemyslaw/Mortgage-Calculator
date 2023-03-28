@@ -13,6 +13,7 @@ public class Main {
 
         int loan = 0;
         float monthlyInterest = 0;
+        int numberOfPayments = 0;
 
         System.out.println("Witaj w kalkulatorze kredytowym");
         System.out.println("-------------------------------");
@@ -37,16 +38,22 @@ public class Main {
             System.out.println("Oprocentowanie powinno być w przedziale od 1 do 50");
         }
 
-        System.out.println("Podaj okres spłaty (ilość lat): ");
-        byte years = scanner.nextByte();
-        int numberOfPayments = years * MONTHS_IN_YEAR;
+        while (true) {
+            System.out.println("Podaj okres spłaty (ilość lat): ");
+            byte years = scanner.nextByte();
+            if (years >= 1 && years <= 40) {
+                numberOfPayments = years * MONTHS_IN_YEAR;
+                break;
+            }
+            System.out.println("Okres kredytowania powinnien mieścić się w zakresie od roku do 40 lat");
+        }
 
         double mortage = loan
                 * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
-                / (Math.pow(1 + monthlyInterest, numberOfPayments) -1);
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
 
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortage);
         System.out.println("Miesięczna rata kredytu wynosi : " + mortgageFormatted);
     }
 
-    }
+}
