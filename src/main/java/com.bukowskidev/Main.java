@@ -8,12 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
+
 
         int loan = 0;
-        float monthlyInterest = 0;
-        int numberOfPayments = 0;
+        float annualInterest = 0;
+        byte years = 0;
 
         System.out.println("Witaj w kalkulatorze kredytowym");
         System.out.println("-------------------------------");
@@ -30,30 +29,37 @@ public class Main {
 
         while (true) {
             System.out.println("Podaj roczne oprocentowanie:");
-            float annualInterest = scanner.nextFloat();
-            if (annualInterest >= 1 && annualInterest <= 50) {
-                monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+            annualInterest = scanner.nextFloat();
+            if (annualInterest >= 1 && annualInterest <= 50)
                 break;
-            }
             System.out.println("Oprocentowanie powinno być w przedziale od 1 do 50");
         }
 
         while (true) {
             System.out.println("Podaj okres spłaty (ilość lat): ");
-            byte years = scanner.nextByte();
-            if (years >= 1 && years <= 40) {
-                numberOfPayments = years * MONTHS_IN_YEAR;
+            years = scanner.nextByte();
+            if (years >= 1 && years <= 40)
                 break;
-            }
             System.out.println("Okres kredytowania powinnien mieścić się w zakresie od roku do 40 lat");
         }
 
-        double mortage = loan
-                * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
-                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+         double mortage = calculateMortgage(loan, annualInterest, years);
 
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortage);
         System.out.println("Miesięczna rata kredytu wynosi : " + mortgageFormatted);
     }
 
+    public static double calculateMortgage(int loan, float annualInterest, byte years) {
+
+        final byte MONTHS_IN_YEAR = 12;
+        final byte PERCENT = 100;
+
+        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        short numberOfPayments = (short)(years * MONTHS_IN_YEAR);
+        double mortage = loan
+                * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+
+        return mortage;
+    }
 }
