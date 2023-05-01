@@ -18,13 +18,20 @@ public class Main {
         float annualInterest = (float) readNumber("Oprocentowanie: ", 1, 50);
         byte years = (byte) readNumber("Okres kredytowania", 1, 40);
 
+        printMortgage(loan, annualInterest, years);
+        printPaymentSchedule(loan, annualInterest, years);
+    }
+
+    public static void printMortgage(int loan, float annualInterest, byte years) {
         double mortage = calculateMortgage(loan, annualInterest, years);
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortage);
         System.out.println();
         System.out.println("Kredyt");
         System.out.println("------");
         System.out.println("Miesięczna rata kredytu wynosi : " + mortgageFormatted);
+    }
 
+    public static void printPaymentSchedule(int loan, float annualInterest, byte years) {
         System.out.println();
         System.out.println("Tabela spłat");
         System.out.println("------------");
