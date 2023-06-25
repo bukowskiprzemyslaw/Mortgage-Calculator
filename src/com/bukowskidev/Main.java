@@ -1,8 +1,9 @@
-package main.java.com.bukowskidev;
+package com.bukowskidev;
 
+
+import com.bukowskidev.Console;
 
 import java.text.NumberFormat;
-import java.util.Scanner;
 
 public class Main {
 
@@ -14,9 +15,9 @@ public class Main {
         System.out.println("Witaj w kalkulatorze kredytowym");
         System.out.println("-------------------------------");
 
-        int loan = (int) readNumber("Kredyt: ", 1000, 1000000);
-        float annualInterest = (float) readNumber("Oprocentowanie: ", 1, 50);
-        byte years = (byte) readNumber("Okres kredytowania", 1, 40);
+        int loan = (int) Console.readNumber("Kredyt: ", 1000, 1000000);
+        float annualInterest = (float) Console.readNumber("Oprocentowanie: ", 1, 50);
+        byte years = (byte) Console.readNumber("Okres kredytowania", 1, 40);
 
         printMortgage(loan, annualInterest, years);
         printPaymentSchedule(loan, annualInterest, years);
@@ -39,19 +40,6 @@ public class Main {
             double balance = calculateBalance(loan, annualInterest, years, month);
             System.out.println(NumberFormat.getCurrencyInstance().format(balance));
         }
-    }
-
-    public static double readNumber(String prompt, double min, double max) {
-        Scanner scanner = new Scanner(System.in);
-        double value;
-        while (true) {
-            System.out.println(prompt);
-            value = scanner.nextInt();
-            if (value >= min && value <= max)
-                break;
-            System.out.println("Podaj wartość między" + min + " i " + max );
-        }
-        return value;
     }
 
     public static double calculateMortgage(int loan, float annualInterest, byte years) {
